@@ -193,17 +193,17 @@
                             </div>
                         </div>
                         <div class="resultRight">
-                            <div>結果発表</div>
+                            <div style="padding-top:10px">結果発表</div>
                             <div id="resultPoint">
                                 40</div>
                             <div id="resultImage"></div>
                         </div>
+                        <div style="margin-top: 300px;margin-left: 450px;">
+                            <p><a href="output_data.php">みんなの結果を見る</a>
+                            </p>
+                        </div>
                     </div>
-                    <div>
-                        <p>
-                            <a href="output_data.php">みんなの結果を見る</a>
-                        </p>
-                    </div>
+
                 </div>
 
             </div>

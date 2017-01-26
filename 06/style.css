@@ -140,7 +140,7 @@ ul li.selected {
 }
 
 #resultTitle {
-    margin: 44px 0px 0px 20px;
+    margin: 44px 0px 10px 20px;
     width: 400px;
     float: left;
     font-size: 18px;
@@ -149,7 +149,7 @@ ul li.selected {
 }
 
 #resultPoint {
-    margin: 22px 40px 0px 0px;
+    margin: -10px 40px 0px 0px;
     float: right;
     color: #F00;
     font-family: Georgia, "Times New Roman", Times, serif;
@@ -178,7 +178,7 @@ ul li.selected {
     width: 252px;
     height: 217px;
     float: right;
-    margin: 15px 20px 0px 0px;
+    margin: -200px 20px 0px 0px;
     background: url(images/lv4.png) no-repeat 0 0;
 }
 
