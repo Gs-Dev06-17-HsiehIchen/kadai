@@ -5,6 +5,8 @@ body {
 }
 
 #info {
+    background-image: url(imgages/back.png);
+    background-repeat: no-repeat;
     margin: 50px auto;
     width: 700px;
     height: 550px;
