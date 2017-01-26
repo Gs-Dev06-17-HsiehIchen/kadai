@@ -2,7 +2,6 @@
 	// メッセージ
 	$message = '';
         try {
-
 		// POSTでこなかったら
 		if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 			throw new Exception();
@@ -64,8 +63,11 @@
         <meta charset="utf-8">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="css/style.css">
+
         <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+        <script src="js/wow.js"></script>
         <script src="js/mental.js"></script>
+
 
     </head>
 
