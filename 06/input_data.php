@@ -67,15 +67,6 @@
         <script src="js/wow.js"></script>
         <script src="js/mental.js"></script>
         <style>
-            #info {
-                background-image: url(imgages/back.png);
-                background-repeat: no-repeat;
-                margin: 50px auto;
-                width: 700px;
-                height: 550px;
-                background: url(images/back.png) no-repeat 0 0;
-            }
-            
             #qArea {
                 overflow: hidden;
                 width: 700px;
