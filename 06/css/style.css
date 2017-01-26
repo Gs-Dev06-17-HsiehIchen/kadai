@@ -1,7 +1,7 @@
 body {
     font-family: "Hiragino Kaku Gothic Pro", Meiryo, Osaka, "MS PGothic", sans-serif;
     font-size: 14px;
-    font-weight: bold;
+/*    font-weight: bold;*/
     color: #E64F96;
 }
 
@@ -102,6 +102,10 @@ button {
     float: right;
 }
 
+#info h2 {
+    color: #222222;
+}
+
 ul {
     list-style: none;
     margin: 0px 0px 0px 2px;
@@ -165,6 +169,10 @@ ul li.selected {
     line-height: 1.7;
     color: #666;
     margin-right: 10px;
+}
+
+.resultRight {
+    margin-top: 20px;
 }
 
 #resultImage {
