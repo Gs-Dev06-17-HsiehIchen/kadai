@@ -182,6 +182,7 @@ ul li.selected {
     background: url(images/lv4.png) no-repeat 0 0;
 }
 
+/*
 #againButton {
     margin: 0px 0px 0px 52px;
     width: 186px;
@@ -192,4 +193,4 @@ ul li.selected {
 
 #againButton:hover {
     background-position: 0px -40px;
-}
+}*/

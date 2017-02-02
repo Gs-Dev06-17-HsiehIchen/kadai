@@ -1,0 +1,179 @@
+header {
+    background-color: #221F1F;
+    height: 50px;
+}
+
+header img {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.title {
+    text-align-last: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: #24211F;
+}
+
+.title img {
+    padding: 10px 10px;
+    margin: 15px 5px;
+}
+
+.title h1 {
+    margin: 20px 20px 10px;
+    font-size: 40px;
+}
+
+.title h3 {
+    font-size: 15px;
+}
+
+.inner-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 90%;
+    height: 250px;
+    margin: 20px auto;
+    background-color: #EFECEA;
+}
+
+.inner-left {
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+    margin-left: 30px;
+    margin-right: 10px;
+}
+
+.inner-left p {
+    color: #221F1F;
+    padding: 5px 10px 10px;
+}
+
+.keyword-search {
+    display: none;
+}
+
+.barcode-search {
+    display: none;
+}
+
+.add {
+    display: none;
+}
+
+.search {
+    width: 150px;
+    height: 150px;
+    color: #fff;
+    font-size: 13px;
+    border-style: solid;
+    border-width: thick;
+    border-color: #221F1F;
+    border-radius: 3px;
+    background-color: #A2C436;
+    margin: 40px 30px;
+    border-radius: 5px;
+}
+
+.scan {
+    width: 150px;
+    height: 150px;
+    color: #fff;
+    font-size: 13px;
+    border-style: solid;
+    border-width: thick;
+    border-color: #221F1F;
+    border-radius: 3px;
+    background-color: #A2C436;
+    border-radius: 5px;
+    margin: 40px 30px;
+}
+
+.inner-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 30px;
+    margin-right: 30px;
+    width: 30%;
+}
+
+.inner-right input {
+    width: 200px;
+    height: 50px;
+    border-style: solid;
+    border-width: thick;
+    border-color: #221F1F;
+    border-radius: 3px;
+}
+
+.inner-right button {
+    width: 80px;
+    margin-top: 15px;
+    background-color: #C3E349;
+    border-style: solid;
+    border-width: thick;
+    border-color: #221F1F;
+    border-radius: 3px;
+    margin-left: 150px;
+}
+
+#isbn {
+    width: 200px;
+    height: 30px;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+}
+
+form {
+    background-color: #DEEEB0;
+    height: 300px;
+    width: 70%;
+    color: #34383B;
+    font-weight: bold;
+}
+
+.record {
+    margin: 0 auto;
+}
+
+.book-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.book-info-left {
+    margin: 20px 60px 20px;
+}
+
+.book-info-left div {
+    margin-top: 10px;
+}
+
+.book-info-right {
+    margin: 40px 30px 10px;
+}
+
+.book-info-right p {
+    margin: 10px;
+}
+
+main button {
+    font-size: 13px;
+    padding: 4px 10px;
+    font-weight: bold;
+    background-color: #FEB000;
+    border-style: solid;
+    border-width: thick;
+    border-color: #221F1F;
+    border-radius: 3px;
+    margin-left: 45%;
+}
