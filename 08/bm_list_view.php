@@ -21,7 +21,7 @@ if($status==false){
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
     
       $view .="<p>";
-      $view .='<a href="bm_list_view.php? id='.$result["id"].'">';
+      $view .='<a href="detail.php? id='.$result["id"].'">';
       $view .= $result["name"]."[".$result["lid"]."]";
       $view .="</a>";
       

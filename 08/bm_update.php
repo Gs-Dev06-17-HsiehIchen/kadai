@@ -1,8 +1,9 @@
 <?php
 //1.POSTでParamを取得
+$id     = $_POST["id"];
 $name   = $_POST["name"];
-$lid  = $_POST["lid"];
-$lpw = $_POST["lpw"];
+$lid    = $_POST["lid"];
+$lpw    = $_POST["lpw"];
 
 //2. DB接続します(エラー処理追加)
 try {
@@ -16,7 +17,8 @@ try {
 $stmt = $pdo->prepare("UPDATE gs_user_table SET name=:name,lid=:lid,lpw=:lpw WHERE id=:id");
 $stmt->bindValue(':name', $name);
 $stmt->bindValue(':lid', $lid);
-$stmt->bindValue('lpw', $lpw);
+$stmt->bindValue(':lpw', $lpw);
+$stmt->bindValue(':id', $id);
 $status = $stmt->execute();
 
 //４．データ登録処理後
@@ -26,7 +28,7 @@ if($status==false){
   exit("QueryError:".$error[2]);
 }else{
   //５．index.phpへリダイレクト
-  header("Location: select.php");
+  header("Location: bm_list_view.php");
   exit;
 }
 

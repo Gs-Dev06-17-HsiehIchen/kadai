@@ -12,7 +12,7 @@ try {
 
 
 //３．データ登録SQL作成
-$stmt = $pdo->prepare("DELETE FROM gs_an_table WHERE id=:id");
+$stmt = $pdo->prepare("DELETE FROM gs_user_table WHERE id=:id");
 $stmt->bindValue(':id', $id);
 $status = $stmt->execute();
 
@@ -23,7 +23,7 @@ if($status==false){
   exit("QueryError:".$error[2]);
 }else{
   //５．index.phpへリダイレクト
-  header("Location: select.php");
+  header("Location: bm_list_view.php");
   exit;
 }
 

@@ -8,7 +8,7 @@ try {
 }
 
 //２．データ登録SQL作成
-$stmt = $pdo->prepare("SELECT * FROM gs_an_table WHERE id = :id");
+$stmt = $pdo->prepare("SELECT * FROM gs_user_table WHERE id = :id");
 $stmt->bindValue(':id',$id,PDO::PARAM_INT);//STR or INT
 $status = $stmt->execute();
 
@@ -44,13 +44,13 @@ if($status==false){
         <header>
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
-                    <div class="navbar-header"><a class="navbar-brand" href="select.php">データ一覧</a></div>
+                    <div class="navbar-header"><a class="navbar-brand" href="bm_list_view.php">データ一覧</a></div>
             </nav>
         </header>
         <!-- Head[End] -->
 
         <!-- Main[Start] -->
-        <form method="post" action="update.php">
+        <form method="post" action="bm_update.php">
             <div class="jumbotron">
                 <fieldset>
                     <legend>フリーアンケート</legend>
@@ -58,14 +58,12 @@ if($status==false){
                         <input type="text" name="name" value="<?=$res["name"]?>">
                     </label>
                     <br>
-                    <label>Email：
-                        <input type="text" name="email" value="<?=$res["email"]?>">
+                    <label>アカウント：
+                        <input type="text" name="lid" value="<?=$res["lid"]?>">
                     </label>
                     <br>
-                    <label>
-                        <textArea name="naiyou" rows="4" cols="40">
-                            <?=$res["naiyou"]?>
-                        </textArea>
+                    <label>パスワード
+                        <input type="password" name="lpw" value="<?=$res["lpw"]?>">
                     </label>
                     <br>
                     <input type="text" name="id" value="<?=$id?>">
