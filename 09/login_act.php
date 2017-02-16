@@ -37,22 +37,15 @@ if($res==false){
 //4. 抽出データ数を取得
 //$count = $stmt->fetchColumn(); //SELECT COUNT(*)で使用可能()
 $val = $stmt->fetch(); //1レコードだけ取得する方法
-$lpw = '';
-$password_error = '';
 
 //5. 該当レコードがあればSESSIONに値を代入
 //認証処理
-if( $val["id"] != "" ){
+if ($val !== false && password_verify($_POST['lpw'], $val['lpw'])) {
   $_SESSION["chk_ssid"]  = session_id();
   $_SESSION["lid"] = $val['lid'];
-    
   header("Location:bm/bm_list_view.php");
-}else if (!password_verify($lpw, $res['lpw'])) 
-    {
-    $password_error = 'メールアドレスかパスワードが間違っています。';
-     }
-else{
-    print'ログインされていません。<br>';
+}else{
+    print'IDかパスワードが間違っています。<br>';
     print'<a href="login.php">ログイン画面へ</a>';
   //logout処理を経由して全画面へ
 //  header("Location:login.php");

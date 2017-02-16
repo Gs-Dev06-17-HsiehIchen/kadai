@@ -1,112 +1,125 @@
+<?php
+session_start();
+require_once 'functions.php';
+$user = loginCheck(false);
+
+$pdo = ConnectDatabase();
+
+$and = [];
+if (array_key_exists('major', $_GET) && is_string($_GET['major'])) {
+  $and['d.major'] = ['placeholder' => ':major', 'value' => trim($_GET['major'])];
+}
+if (array_key_exists('user', $_GET) && is_string($_GET['user'])) {
+  $and['c.id'] = ['placeholder' => ':user', 'value' => trim($_GET['user'])];
+  $sql='SELECT * FROM tr_users WHERE id=:id';
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':id', $_GET['user'], PDO::PARAM_STR);
+  $stmt->execute();
+  $selectUser = $stmt->fetch();
+  
+}
+if (count($and) > 0) {
+  $data = [];
+  foreach ($and as $column => $i) {
+    $data[] = "{$column} = {$i['placeholder']}";
+  }
+  $where = implode(' AND ', $data);
+} else {
+  $where = '1 = 1';
+}
+
+$sql = <<<SQL
+SELECT
+  a.id,
+  a.name,
+  a.thumbnail,
+  COUNT(a.id) AS n
+FROM tr_books a
+  JOIN tr_bookmarks b ON (a.id = b.book)
+  JOIN tr_users c ON (c.id = b.user)
+  JOIN tr_universities d ON (c.university = d.id)
+WHERE
+  {$where}
+GROUP BY
+  a.id
+SQL;
+
+$stmt = $pdo->prepare($sql);
+foreach ($and as $i) {
+  $stmt->bindValue($i['placeholder'], $i['value'], PDO::PARAM_STR);
+}
+
+$stmt->execute();
+
+$books = [];
+foreach ($stmt as $i) {
+  $books[] = $i;
+}
+
+?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>読書記録</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/reset.css">
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-
-    <script type="text/javascript" src="js/jquery.raty.js">
-    </script>
-    <script type="text/javascript" src="js/qrcodelib.js"></script>
-    <script type="text/javascript" src="js/webcodecamjs.js"></script>
-    <script src="js/bookrecord.js"></script>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/awesome.css">
 </head>
-
 <body>
 
-    <header>
-        <img src="img/TokyoRocket_white.png" width="80px" alt="">
-    </header>
+<?php if (!is_null($user)): ?>
+  <header>
+    <?= h($user['name']); ?>さんでログイン中
+    <a href="logout.php">ログアウト</a>
+  </header>
+<?php endif; ?>
 
-
-    <div class="title">
-        <div class="title-left">
-            <img src="img/bird.png" width="50px" alt=""></div>
-        <div class="title-right">
-            <h1>読書記録</h1>
-            <h3>本の記録をはじめる</h3>
+   <div class="top">
+        <div>
+            <a href="./">
+                <img src="img/logo.png" alt="" class="logo">
+            </a>
+            <a href="http://tokyo-rocket.net/" class="copyright">© TokyoRocket Inc. All Rights Reserved.</a>
+                
         </div>
-
-    </div>
-
-    <div class="inner-wrapper">
-        <div class="inner-left">
-            <button class="search">
-                <p>書名で入力</p>
-                <img src="img/search.png" width="50px" alt="">
-            </button>
-            <button class="scan">
-                <p>バーコードで入力</p>
-                <img src="img/scan.png" width="50px" alt="">
-            </button>
-
-        </div>
-        <div class="inner-right">
-            <div class="keyword-search">
-                <input class="keyword-search" name="q" type="text" placeholder="タイトル、著者、ISBN">
-            </div>
-
-            <div class="barcode-search">
-                <canvas style="border: solid thick; width: 180px; height:50px;"></canvas>
-                <p>ISBN</p>
-                <input type="text" id="isbn">
-            </div>
-
-            <div class="add">
-                <button id="search_btn">
-                    <p>本棚に追加</p><img src="img/book.png" width="30px" alt="">
-                </button>
-            </div>
+        <div class="tab-box">
+          <div class="tab current"><a href="./">全て</a></div>
+            <div class="tab"><a href="./?major=経済系">経済系</a></div>
+            <div class="tab"><a href="./?major=経営系">経営系</a></div>
+            <div class="tab"><a href="./?major=理工系">理工系</a></div>
+            <div class="tab"><a href="./?major=情報系">情報系</a></div>
+            <div class="tab"><a href="./?major=法学系">法学系</a></div>
+            <div class="tab"><a href="./?major=文学系">文学系</a></div>
+<?php if (!is_null($user)): ?>
+            <div class="tab"><a href="./?user=<?= h($user['id']); ?>">マイブック</a></div>
+<?php endif; ?>
         </div>
     </div>
-    <!-- Main[Start] -->
+    <div class="guide">
+    <p>AwesomBooksは、大学生がAwesomeな本をシェアできるサービスです。<br>専攻ごとに本を検索できます。</p>
+    <a href="book.php" class="post-b">投稿する</a>
+    </div>
 
-    <main>
-        <form class="record" method="post" action="insert.php">
-            <div class="book-info">
-                <div class="book-info-left">
-                    <div>書名
-                        <span id="book_title"></span>
-                    </div>
-                    <div>著者
-                        <span id="book_authors"></span>
-                    </div>
-                    <div style="width: 30%;">
-                        <img id="book_img" style="width:auto; height:180px;">
-                    </div>
-                </div>
-                <div class="book-info-right">
-                    <div>
-                        <p>感想</p>
-                        <textarea name="comment" id="" cols="30" rows="10"></textarea>
-                    </div>
-
-                    <p>評価</p>
-                    <div class="score">
-                        <input type="hidden" id="score_saved" name="score" value="">
-
-                    </div>
-
-                </div>
-            </div>
-
-            <button value="送信">送信</button>
-            <input type="hidden" name="name">
-            <input type="hidden" name="author">
-            <input type="hidden" name="thumbnail">
-
-
-
-        </form>
-
-
-
-    </main>
-    <div class="myshelf"><a href="list.php">MY本棚</a></div>
+   
+    <?php if (isset($selectUser)): ?>
+        <div><?php print h($selectUser['name']).'さんのAwesomeBooks'?></div>
+    <?php endif; ?>
+   
+   
+    <div class="post-box">
+<?php foreach ($books as $book): ?>
+      <div class="book">
+        <div>
+           <a href="detail.php?id=<?= h($book['id']); ?>">
+             <img class="book-img" src="<?= h($book['thumbnail']); ?>">
+          </a>
+        </div>
+        <div class="book-txt">
+          <p><?= h($book['name']); ?></p>
+          <p>投稿件数：<?= h($book['n']); ?></p>
+        </div>
+      </div>
+<?php endforeach; ?>
+    </div>
 
 </body>
-
 </html>
