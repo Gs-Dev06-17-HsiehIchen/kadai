@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("functions.php");
+include("../../functions.php");
 ssidCheck();
 
 //1.GETでidを取得
@@ -28,15 +28,15 @@ if($status==false){
 <head>
   <meta charset="UTF-8">
   <title>POSTデータ登録</title>
-  <script src="ckeditor/ckeditor.js">
+  <script src="../../ckeditor/ckeditor.js">
   </script>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet">
   <style>div{padding: 10px;font-size:16px;}</style>
 </head>
 <body>
 
 <!-- Head[Start] -->
-<?php include("menu.php"); ?>
+<?php include("../menu.php"); ?>
 <!-- Head[End] -->
 
 <!-- Main[Start] -->
@@ -53,8 +53,12 @@ if($status==false){
      </script>
      <input type="hidden" name="id" value="<?=$id?>">
      <input type="file" name="filename">
-     <img src="<?=$row["upfile"]?>" alt="">
+
+     <?php if($row["upfile"]!=="") :?>
+     <img src="../../<?=$row["upfile"]?>" alt="">
+     <button type="button" onclick="location.href='img_delete.php?id=<?=$id?>'">画像を削除</button>
      <p>現在の画像</p>
+     <?php endif; ?>
      <input type="submit" value="送信">
     </fieldset>
   </div>

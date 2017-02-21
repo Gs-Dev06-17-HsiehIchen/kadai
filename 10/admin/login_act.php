@@ -1,6 +1,9 @@
 <?php
 session_start();
-include("functions.php");
+include("../functions.php");
+
+$id = $_POST["lid"];
+$pw = $_POST["lpw"];
 
 //パラメータチェック
 if(
@@ -16,10 +19,9 @@ if(
 $pdo = db_con();
 
 //３．データ登録SQL作成
-$sql="SELECT * FROM gs_user_table WHERE lid=:lid AND lpw=:lpw AND life_flg=0";
+$sql="SELECT * FROM gs_user_table WHERE lid=:lid AND life_flg=1";
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':lid', $_POST["lid"]);
-$stmt->bindValue(':lpw', $_POST["lpw"]);
 $res = $stmt->execute();
 
 //SQL実行時にエラーがある場合
@@ -32,6 +34,22 @@ if($res==false){
 $val = $stmt->fetch(); //1レコードだけ取得する方法
 
 //6. 該当レコードがあればSESSIONに値を代入
+if( password_verify($pw, $val["lpw"])){ 
+  //password_hash("パスワード文字", PASSWORD_DEFAULT);でパスワード登録しておくこと
+  $_SESSION["schk"]   = session_id();
+  $_SESSION["kanri_flg"]  = $val['kanri_flg'];
+  $_SESSION["name"]       = $val['name'];
+  //Login処理OKの場合select.phpへ遷移
+  header("Location: news/select.php");
+}else{
+  //Login処理NGの場合login.phpへ遷移
+  header("Location: login.php");
+}
+//処理終了
+exit();
+?>
+
+<!--
 
 if( $val["id"] != "" ){
   $_SESSION["schk"] = session_id();
@@ -43,4 +61,4 @@ if( $val["id"] != "" ){
   header("Location: login.php");
 }
 exit();
-?>
+-->

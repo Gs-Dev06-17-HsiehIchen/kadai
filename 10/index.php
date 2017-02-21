@@ -59,7 +59,7 @@ if($status==false){
             <li>GROWTH CHEESE</li>
             <li>CHEESE PERSPECTIVE</li>
             <li>CHEESE GENERATOR</li>
-            <li><a href="select.php">管理者画面へ</a></li>
+            <li><a href="admin/news/select.php">管理者画面へ</a></li>
         </ul>
         </div>
     </header>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'functions.php';
+require_once '../../functions.php';
 ssidCheck();
 
 //1.  DB接続します
@@ -35,14 +35,28 @@ if($status==false){
       $view .="</a>";
       $view .="</p>";
       
-      if($result["kanri_flg"] >= 1)
-      {
-          $view.="管理者";
-      }
-      else
-      {
-          $view.="一般";
-      }
+    //三項演算子の書き方 下のif文と同じ
+      $view .=$result["kanri_flg"] >= 1 ? "管理者<br>" : "一般<br>";
+    
+      $view .=$result["life_flg"] >= 1 ? "利用中<br>" : "退会済み<br>";
+    
+//      if($result["kanri_flg"] >= 1)
+//      {
+//          $view.="管理者<br>";
+//      }
+//      else
+//      {
+//          $view.="一般<br>";
+//      }
+//    
+//      if($result["life_flg"] >= 1)
+//      {
+//          $view.="利用中";
+//      }
+//      else
+//      {
+//          $view.="退会済み";
+//      }
       
 
      
@@ -63,8 +77,8 @@ if($status==false){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ユーザー一覧・編集</title>
-        <link rel="stylesheet" href="css/range.css">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="../../stylesheet" href="css/range.css">
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <style>div{padding: 10px;font-size:16px;}</style>
         </style>
     </head>
@@ -72,7 +86,7 @@ if($status==false){
     <body id="main">
         <!-- Head[Start] -->
         <?php
-        include("menu.php");
+        include("../menu.php");
         ?>
         <div>
           <div> <?php echo $_SESSION["name"] ?> さんログイン中</div>
@@ -87,7 +101,7 @@ if($status==false){
         </div>
         </div>
         <!-- Main[End] -->
-
+<a href="../../index.php">index.phpへ</a>
     </body>
 
     </html>

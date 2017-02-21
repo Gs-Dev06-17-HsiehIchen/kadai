@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("functions.php");
+include("../../functions.php");
 ssidCheck(); //セッションチェック
 
 //1.  DB接続します
@@ -37,15 +37,15 @@ if($status==false){
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>フリーアンケート表示</title>
-<link rel="stylesheet" href="css/range.css">
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../../css/range.css">
+<link href="../../css/bootstrap.min.css" rel="stylesheet">
 <style>div{padding: 10px;font-size:16px;}</style>
 </head>
 <body id="main">
 
 <!-- Head[Start] -->
 <?php
-include("menu.php");
+include("../menu.php");
 ?>
 <!-- Head[End] -->
 
@@ -54,7 +54,7 @@ include("menu.php");
     <div> <?php echo $_SESSION["name"] ?> さんログイン中</div>
     <div class="container jumbotron"><?=$view?></div>
 </div>
-<a href="index.php">index.phpへ</a>
+<a href="../../index.php">index.phpへ</a>
 <!-- Main[End] -->
 
 </body>

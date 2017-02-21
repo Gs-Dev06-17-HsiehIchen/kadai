@@ -1,4 +1,7 @@
 <?php
+session_start();
+include("../../functions.php");
+ssidCheck(); //セッションチェック
 //1.POSTでParamを取得
 $id     = $_GET["id"];
 //2.DB接続など

@@ -1,5 +1,5 @@
 <?php
-include("functions.php");
+include("../../functions.php");
 //1.POSTでParamを取得
 $id = $_GET["id"];
 

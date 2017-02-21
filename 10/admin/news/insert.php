@@ -1,5 +1,5 @@
 <?php
-include("functions.php");
+include("../../functions.php");
 //入力チェック(受信確認処理追加)
 if(
   !isset($_POST["title"]) || $_POST["title"]=="" ||
@@ -18,11 +18,11 @@ $article = $_POST["article"];
 if(isset($_FILES['filename']) && $_FILES['filename']['error']==0){
     
     //2. アップロード先とファイル名を作成
-    $upload_file = "./upload/".$_FILES["filename"]["name"];
+    $upload_file = "./upload/".md5(uniqid('', true)).$_FILES["filename"]["name"];
     
     // アップロードしたファイルを指定のパスへ移動
     //move_uploaded_file("一時保存場所","成功後に正しい場所に移動");
-    if (move_uploaded_file($_FILES["filename"]['tmp_name'],$upload_file)){
+    if (move_uploaded_file($_FILES["filename"]['tmp_name'],"../../".$upload_file)){
 
         //パーミッションを変更（ファイルの読み込み権限を付けてあげる）
         chmod($upload_file,0644);
@@ -32,8 +32,7 @@ if(isset($_FILES['filename']) && $_FILES['filename']['error']==0){
         exit;
     }
 }else{
-    echo "fileupload失敗";
-    exit;
+    $upload_file="";
 }
 
 
